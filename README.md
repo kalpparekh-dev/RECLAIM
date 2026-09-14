@@ -1,5 +1,9 @@
 # RECLAIM — Intelligent Payment Recovery & Decisioning Platform
 
+[![Live Site](https://img.shields.io/badge/Live_Site-Render-emerald?style=for-the-badge&logo=render)](https://reclaim-oclp.onrender.com)
+
+> 🚀 **Live Site**: [https://reclaim-oclp.onrender.com](https://reclaim-oclp.onrender.com)
+
 RECLAIM is an enterprise-grade Payment Recovery, State Machine, Gateway Abstraction, Reconciliation, and Causal Decisioning Platform built for high-throughput payment systems (e.g. Razorpay).
 
 It targets payment recovery interventions using heterogeneous causal uplift predictions derived from treatment-control experiments. The top 5% highest-uplift failed transactions receive targeted recovery actions (`TARGET`), while remaining transactions fall back to standard retries (`RETRY_ALL`).
