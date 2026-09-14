@@ -121,23 +121,21 @@ class TestP0P1RemediationSuite(unittest.TestCase):
 
     def test_p0_5_policy_hash_mismatch_forces_fallback_runtime_mode(self):
         """P0-5: Verify SHA256 mismatch forces runtime mode FALLBACK and turns all decisions into RETRY_ALL."""
-        # Save real registry path
-        real_registry = r"D:\RECLAIM\data\generated\policy_registry.json"
-        
-        # Initialize PolicyService with non-existent registry path to force hash mismatch
-        svc = PolicyService(registry_path="D:\\RECLAIM\\data\\fake_registry.json")
-        
-        self.assertFalse(svc.hash_validated)
         runtime = get_runtime_control()
-        self.assertEqual(runtime.get_config().get("mode"), "FALLBACK")
+        try:
+            # Initialize PolicyService with non-existent registry path to force hash mismatch
+            svc = PolicyService(registry_path="non_existent_fake_registry.json")
+            
+            self.assertFalse(svc.hash_validated)
+            self.assertEqual(runtime.get_config().get("mode"), "FALLBACK")
 
-        decision = svc.get_decision("RECLAIM-V2-000001")
-        self.assertEqual(decision["selected_policy"], "RETRY_ALL")
-        self.assertTrue(decision["fallback_applied"])
-        self.assertEqual(decision["fallback_reason"], "POLICY_HASH_MISMATCH")
-
-        # Restore runtime mode to ACTIVE for remaining tests
-        runtime.set_mode(RuntimeMode.ACTIVE, updated_by="TEST_RESTORE", reason="Restore after test_p0_5")
+            decision = svc.get_decision("RECLAIM-V2-000001")
+            self.assertEqual(decision["selected_policy"], "RETRY_ALL")
+            self.assertTrue(decision["fallback_applied"])
+            self.assertEqual(decision["fallback_reason"], "POLICY_HASH_MISMATCH")
+        finally:
+            # Restore runtime mode to ACTIVE for remaining tests
+            runtime.set_mode(RuntimeMode.ACTIVE, updated_by="TEST_RESTORE", reason="Restore after test_p0_5")
 
     def test_p0_6_razorpay_webhook_signature_verification(self):
         """P0-6: Verify HMAC-SHA256 signature verification over raw request body."""

@@ -10,7 +10,8 @@ class RuntimeMode(str, Enum):
     FALLBACK = "FALLBACK"
     MAINTENANCE = "MAINTENANCE"
 
-CONFIG_FILE_PATH = r"D:\RECLAIM\data\runtime_config.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CONFIG_FILE_PATH = os.path.join(BASE_DIR, "data", "runtime_config.json")
 
 class RuntimeControlManager:
     def __init__(self, config_path: str = CONFIG_FILE_PATH):
@@ -18,7 +19,9 @@ class RuntimeControlManager:
         self._ensure_config()
 
     def _ensure_config(self):
-        os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+        dir_path = os.path.dirname(self.config_path)
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
         if not os.path.exists(self.config_path):
             initial_config = {
                 "mode": RuntimeMode.ACTIVE.value,
@@ -43,36 +46,37 @@ class RuntimeControlManager:
                 "allow_action_execution": False
             }
 
+    def is_active(self) -> bool:
+        config = self.get_config()
+        return config.get("mode") == RuntimeMode.ACTIVE.value
+
     def _save_config(self, config: Dict[str, Any]):
+        dir_path = os.path.dirname(self.config_path)
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
         with open(self.config_path, "w") as f:
             json.dump(config, f, indent=2)
 
     def set_mode(self, mode: RuntimeMode, updated_by: str = "ADMIN_OPERATOR", reason: str = "Manual toggle") -> Dict[str, Any]:
         config = self.get_config()
-        old_mode = config.get("mode")
+        old_mode = config.get("mode", RuntimeMode.ACTIVE.value)
         config["mode"] = mode.value
         config["last_updated"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
         config["updated_by"] = updated_by
 
         audit_entry = {
             "timestamp": config["last_updated"],
-            "old_mode": old_mode,
+            "previous_mode": old_mode,
             "new_mode": mode.value,
             "updated_by": updated_by,
             "reason": reason
         }
-        if "audit_log" not in config or not isinstance(config["audit_log"], list):
-            config["audit_log"] = []
-        config["audit_log"].insert(0, audit_entry)
-
+        config.setdefault("audit_log", []).append(audit_entry)
         self._save_config(config)
         return config
 
-    def trigger_kill_switch(self, reason: str = "EMERGENCY_KILL_SWITCH_ACTIVATED", updated_by: str = "SYSTEM_SAFETY") -> Dict[str, Any]:
-        return self.set_mode(RuntimeMode.FALLBACK, updated_by=updated_by, reason=reason)
-
-    def is_active(self) -> bool:
-        return self.get_config().get("mode") == RuntimeMode.ACTIVE.value
+    def trigger_kill_switch(self, updated_by: str = "EMERGENCY_OPERATOR", reason: str = "EMERGENCY_KILL_SWITCH") -> Dict[str, Any]:
+        return self.set_mode(RuntimeMode.PAUSED, updated_by=updated_by, reason=reason)
 
 _runtime_control_instance = None
 

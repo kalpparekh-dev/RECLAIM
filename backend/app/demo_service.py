@@ -5,7 +5,8 @@ import datetime
 from typing import Dict, Any, List, Optional
 from backend.app.policy_service import get_policy_service
 
-DEMO_STORE_PATH = r"D:\RECLAIM\data\demo_execution_store.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DEMO_STORE_PATH = os.path.join(BASE_DIR, "data", "demo_execution_store.json")
 
 class DemoService:
     def __init__(self, store_path: str = DEMO_STORE_PATH):
@@ -13,7 +14,9 @@ class DemoService:
         self._ensure_store_exists()
 
     def _ensure_store_exists(self):
-        os.makedirs(os.path.dirname(self.store_path), exist_ok=True)
+        dir_path = os.path.dirname(self.store_path)
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
         if not os.path.exists(self.store_path):
             with open(self.store_path, "w") as f:
                 json.dump([], f)

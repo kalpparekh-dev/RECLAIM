@@ -4,7 +4,8 @@ import datetime
 from typing import Dict, Any, Optional
 from backend.app.runtime_control import get_runtime_control, RuntimeMode
 
-DRIFT_REPORT_PATH = r"D:\RECLAIM\data\generated\drift_monitoring_report.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DRIFT_REPORT_PATH = os.path.join(BASE_DIR, "data", "generated", "drift_monitoring_report.json")
 
 class DriftMonitorService:
     def __init__(self, report_path: str = DRIFT_REPORT_PATH):

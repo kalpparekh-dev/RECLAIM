@@ -16,13 +16,15 @@ class TestSecondPassAdversarialVerification(unittest.TestCase):
 
     def test_02_sha256_hash_mismatch_does_not_halt_service(self):
         """Red Flag 9: Verify SHA256 mismatch forces runtime mode FALLBACK and safe RETRY_ALL."""
-        svc = PolicyService(registry_path="D:\\RECLAIM\\data\\non_existent_registry.json")
-        self.assertFalse(svc.hash_validated)
-        decision = svc.get_decision("RECLAIM-V2-000001")
-        self.assertEqual(decision["selected_policy"], "RETRY_ALL")
-        self.assertTrue(decision["fallback_applied"])
-        self.assertEqual(decision["fallback_reason"], "POLICY_HASH_MISMATCH")
-        get_runtime_control().set_mode(RuntimeMode.ACTIVE, updated_by="TEST", reason="Restore")
+        try:
+            svc = PolicyService(registry_path="non_existent_registry.json")
+            self.assertFalse(svc.hash_validated)
+            decision = svc.get_decision("RECLAIM-V2-000001")
+            self.assertEqual(decision["selected_policy"], "RETRY_ALL")
+            self.assertTrue(decision["fallback_applied"])
+            self.assertEqual(decision["fallback_reason"], "POLICY_HASH_MISMATCH")
+        finally:
+            get_runtime_control().set_mode(RuntimeMode.ACTIVE, updated_by="TEST", reason="Restore")
 
     def test_03_negative_net_value_calculation_structure(self):
         """Red Flag 8: Verify net value engine flags negative profit (PARTIALLY_SOLVED)."""

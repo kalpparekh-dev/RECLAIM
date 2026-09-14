@@ -3,9 +3,10 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Any, List
 
-MONITORING_CSV_PATH = r"D:\RECLAIM\data\generated\reclaim_production_v21_monitoring.csv"
-METRICS_CSV_PATH = r"D:\RECLAIM\data\generated\reclaim_production_v21_metrics.csv"
-DATA_QUALITY_CSV_PATH = r"D:\RECLAIM\data\generated\reclaim_production_v21_data_quality.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+MONITORING_CSV_PATH = os.path.join(BASE_DIR, "data", "generated", "reclaim_production_v21_monitoring.csv")
+METRICS_CSV_PATH = os.path.join(BASE_DIR, "data", "generated", "reclaim_production_v21_metrics.csv")
+DATA_QUALITY_CSV_PATH = os.path.join(BASE_DIR, "data", "generated", "reclaim_production_v21_data_quality.csv")
 
 class MonitoringService:
     def __init__(

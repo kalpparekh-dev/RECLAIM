@@ -5,8 +5,9 @@ import pandas as pd
 from typing import Dict, List, Any, Optional
 from backend.app.runtime_control import get_runtime_control, RuntimeMode
 
-DEFAULT_POLICY_PATH = r"D:\RECLAIM\data\generated\causal_uplift_v10_2_predictions.csv"
-REGISTRY_PATH = r"D:\RECLAIM\data\generated\policy_registry.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DEFAULT_POLICY_PATH = os.getenv("POLICY_FILE_PATH", os.path.join(BASE_DIR, "data", "generated", "causal_uplift_v10_2_predictions.csv"))
+REGISTRY_PATH = os.getenv("REGISTRY_FILE_PATH", os.path.join(BASE_DIR, "data", "generated", "policy_registry.json"))
 
 REQUIRED_COLUMNS = [
     "transaction_id",

@@ -2,7 +2,8 @@ import os
 import pandas as pd
 from typing import Dict, Any
 
-OUTCOMES_CSV_PATH = r"D:\RECLAIM\data\generated\recovery_outcomes.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUTCOMES_CSV_PATH = os.path.join(BASE_DIR, "data", "generated", "recovery_outcomes.csv")
 
 class OutcomesService:
     def __init__(self, csv_path: str = OUTCOMES_CSV_PATH):

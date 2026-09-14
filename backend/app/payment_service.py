@@ -12,7 +12,8 @@ from backend.app.domain.models import (
 )
 from backend.app.privacy import mask_customer_id
 
-DB_PATH = r"D:\RECLAIM\data\payments.db"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DB_PATH = os.getenv("PAYMENTS_DB_PATH", os.path.join(BASE_DIR, "data", "payments.db"))
 
 class PaymentServiceError(ValueError):
     """Raised when payment state transition or domain validation fails."""
@@ -21,7 +22,9 @@ class PaymentServiceError(ValueError):
 class PaymentService:
     def __init__(self, db_path: str = DB_PATH):
         self.db_path = db_path
-        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        dir_path = os.path.dirname(self.db_path)
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
         self._init_db()
 
     def _get_connection(self):
