@@ -1,0 +1,2 @@
+total_transactions,treatment_rows,control_rows,treatment_rate,treatment_recovery_rate,control_recovery_rate,observed_recovery_lift,treatment_recovered_value,control_recovered_value,treatment_net_value,control_net_value,incremental_net_value_per_transaction,uplift_ready
+581,290,291,0.4991394148020654,0.6896551724137931,0.6426116838487973,0.04704348856499585,355414.8697405859,356856.9467576408,354907.3697405859,356856.9467576408,-2.4940154663506746,True

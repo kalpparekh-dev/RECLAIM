@@ -1,0 +1,2 @@
+validation_runs,mean_qini,qini_std,positive_qini_rate,mean_economic_uplift,mean_intervention_rate,beat_retry_all_rate,beat_no_intervention_rate,mean_targeting_vs_retry_all,targeting_vs_retry_all_ci_low,targeting_vs_retry_all_ci_high,final_verdict
+10,163513.11581979407,78970.10790873814,1.0,94.24163871472386,0.8490169943352216,0.0,1.0,-907442.1569999999,-1012941.0804433466,-801943.2335566531,TARGETING_NOT_STABLE

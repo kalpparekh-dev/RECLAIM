@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+**/node_modules/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+coverage/
+.pytest_cache/
+
+# Databases and local runtime files
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python cache
+.mypy_cache/
+.ruff_cache/
+
+# Large generated files
+*.pth
+*.pt
+*.onnx
+*.h5
+*.pkl

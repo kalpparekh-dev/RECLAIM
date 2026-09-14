@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-09-13T21:03:06.730335",
+  "policy_version": "V10.2",
+  "current_sha256": "034bf6682905a1ee8e4b65d3247713a4b07efaa9871eb5de0991db55fdb45e55",
+  "registry_sha256": "034bf6682905a1ee8e4b65d3247713a4b07efaa9871eb5de0991db55fdb45e55",
+  "hash_match": true,
+  "total_transactions": 10000,
+  "selected_transactions": 500,
+  "targeting_rate": 0.05,
+  "prediction_drift_metrics": {
+    "treatment_prob_mean": 0.5512,
+    "control_prob_mean": 0.5306,
+    "uplift_mean": 0.020663,
+    "uplift_std": 0.147308,
+    "uplift_p95": 0.259632,
+    "uplift_p99": 0.329537
+  },
+  "drift_alerts": [],
+  "monitoring_status": "PASS"
+}

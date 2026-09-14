@@ -1,0 +1,9 @@
+candidate_file,source_field,target_field,production_side_overlap,outcome_side_overlap,total_mapping_rows,unique_source_ids,unique_target_ids,unique_pairs,duplicate_pairs,ambiguous_sources,ambiguous_targets,end_to_end_pairs,production_coverage,outcome_coverage,bridge_production_coverage,bridge_outcome_coverage,assessment
+causal_uplift_v2_predictions.csv,transaction_id,experiment_source_transaction_id,3000,577,3000,3000,577,3000,0,0,557,20,0.002,0.006887052341597796,1.0,1.0,REJECTED_MANY_TO_ONE
+causal_uplift_v2_predictions.csv,experiment_transaction_id,experiment_source_transaction_id,3000,577,3000,3000,577,3000,0,0,557,20,0.002,0.006887052341597796,1.0,1.0,REJECTED_MANY_TO_ONE
+causal_uplift_v4_predictions.csv,transaction_id,experiment_source_transaction_id,3000,576,3000,3000,576,3000,0,0,562,14,0.0014,0.0048209366391184574,1.0,1.0,REJECTED_MANY_TO_ONE
+causal_uplift_v4_predictions.csv,experiment_transaction_id,experiment_source_transaction_id,3000,576,3000,3000,576,3000,0,0,562,14,0.0014,0.0048209366391184574,1.0,1.0,REJECTED_MANY_TO_ONE
+reclaim_causal_experiment_v2.csv,transaction_id,experiment_source_transaction_id,10000,581,10000,10000,581,10000,0,0,581,0,0.0,0.0,0.0,0.0,REJECTED_MANY_TO_ONE
+reclaim_causal_experiment_v2.csv,experiment_transaction_id,experiment_source_transaction_id,10000,581,10000,10000,581,10000,0,0,581,0,0.0,0.0,0.0,0.0,REJECTED_MANY_TO_ONE
+reclaim_causal_experiment_v3.csv,transaction_id,experiment_source_transaction_id,10000,581,10000,10000,581,10000,0,0,581,0,0.0,0.0,0.0,0.0,REJECTED_MANY_TO_ONE
+reclaim_causal_experiment_v3.csv,experiment_transaction_id,experiment_source_transaction_id,10000,581,10000,10000,581,10000,0,0,581,0,0.0,0.0,0.0,0.0,REJECTED_MANY_TO_ONE

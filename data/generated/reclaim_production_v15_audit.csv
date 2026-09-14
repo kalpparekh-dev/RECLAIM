@@ -1,0 +1,10 @@
+audit_item,status,value
+V10.2 targeting immutable,PASS,YES
+Production population changed,PASS,NO
+Artificial transaction IDs created,PASS,NO
+Artificial outcomes created,PASS,NO
+Calibration predictions treated as outcomes,PASS,NO
+Oracle fields used,PASS,NO
+Matched production outcomes,INFO,0
+Overall match rate,INFO,0.0
+Final readiness verdict,INFO,OUTCOME_CAPTURE_REQUIRED_BEFORE_V7_V8_EVALUATION

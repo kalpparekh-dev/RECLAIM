@@ -1,0 +1,4 @@
+policy,interventions,intervention_rate,recovered_payments,total_net_value,net_per_intervention,incremental_net_value,recovery_rate
+NO_INTERVENTION,0,0.0,0,0.0,0.0,0.0,0.0
+RETRY_ALL,3000,1.0,2141,4652402.35,1550.8007833333331,4652402.35,0.7136666666666667
+ECONOMIC_TARGETING,1515,0.505,1082,2456546.08,1621.4825610561056,2456546.08,0.7141914191419142

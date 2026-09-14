@@ -1,0 +1,7 @@
+source,target,source_ids,target_ids,overlap,source_match_rate,target_match_rate,only_source,only_target
+V7,V8,10000,10000,10000,1.0,1.0,0,0
+V10.2,V7,10000,10000,10000,1.0,1.0,0,0
+V10.2,V8,10000,10000,10000,1.0,1.0,0,0
+V10.2,Recovery Outcomes,10000,2904,0,0.0,0.0,10000,2904
+V7,Recovery Outcomes,10000,2904,0,0.0,0.0,10000,2904
+V8,Recovery Outcomes,10000,2904,0,0.0,0.0,10000,2904

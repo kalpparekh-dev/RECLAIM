@@ -1,0 +1,17 @@
+metric,value
+version,V10.1
+validation_runs,20
+mean_qini,321354.3166688887
+qini_positive_rate,1.0
+mean_probability_uplift,0.007526752989395101
+mean_intervention_rate,0.5
+mean_learned_advantage_vs_retry_all,-53.87078965962864
+learned_advantage_ci_low,-55.723631694786725
+learned_advantage_ci_high,-52.01794762447056
+mean_oracle_advantage,1.1299083550926299
+mean_oracle_intervention_rate,0.9330666666666667
+full_data_intervention_rate,0.5
+full_data_targeting_value,6189454.333718325
+full_data_retry_all_value,6189511.143881653
+full_data_advantage,-56.810163328424096
+final_verdict,V10.1_POSITIVE_INTERVENTION_QINI_SUPPORTED

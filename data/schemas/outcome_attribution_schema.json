@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RECLAIM Outcome Attribution Schema",
+  "description": "Schema for validating production and research payment recovery outcome attribution events.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "transaction_id",
+    "customer_id",
+    "policy_version",
+    "decision",
+    "decision_timestamp",
+    "action_type",
+    "action_timestamp",
+    "outcome_timestamp",
+    "outcome_status",
+    "recovered_amount",
+    "attribution_window_hours",
+    "source_system",
+    "is_production_outcome",
+    "is_synthetic",
+    "attribution_status"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^(EVT|DEMO-EVT)-[A-Za-0-9_-]+$" },
+    "transaction_id": { "type": "string", "minLength": 5 },
+    "customer_id": { "type": "string", "minLength": 3 },
+    "policy_version": { "type": "string" },
+    "decision": { "type": "string", "enum": ["TARGET", "RETRY_ALL"] },
+    "decision_timestamp": { "type": "string", "format": "date-time" },
+    "action_type": { "type": "string" },
+    "action_timestamp": { "type": "string", "format": "date-time" },
+    "outcome_timestamp": { "type": "string", "format": "date-time" },
+    "outcome_status": { 
+      "type": "string", 
+      "enum": ["RECOVERED", "NOT_RECOVERED", "EXPIRED", "UNKNOWN", "PENDING"] 
+    },
+    "recovered_amount": { "type": "number", "minimum": 0.0 },
+    "attribution_window_hours": { "type": "integer", "minimum": 1, "maximum": 168 },
+    "source_system": { "type": "string", "minLength": 1 },
+    "is_production_outcome": { "type": "boolean" },
+    "is_synthetic": { "type": "boolean" },
+    "attribution_status": { 
+      "type": "string", 
+      "enum": ["ATTRIBUTED_CAUSAL", "ATTRIBUTED_NATURAL", "UNATTRIBUTED", "OUT_OF_WINDOW", "SYNTHETIC_SIMULATED"] 
+    }
+  },
+  "additionalProperties": false
+}

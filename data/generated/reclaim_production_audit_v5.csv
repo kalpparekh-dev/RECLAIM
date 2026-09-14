@@ -1,0 +1,8 @@
+check_id,check_name,status,total_transactions,target_transactions,target_rate,mean_predicted_uplift,total_expected_incremental_value,total_estimated_action_cost,total_estimated_net_action_value
+schema,V4 decision schema,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+prediction_math,Uplift and probability-gap arithmetic,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+economic_value,Expected incremental recovery value,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+economic_score,Economic opportunity score,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+target_capacity,Validated 5% target capacity,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+action_layer,Action allocation arithmetic,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574
+oracle_governance,Oracle/evaluation fields excluded from decisions,PASS,10000,500,0.05,0.020663403593658182,1061732.6981532574,261160.0,800572.6981532574

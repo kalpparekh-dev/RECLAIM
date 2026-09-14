@@ -1,0 +1,2 @@
+total_rows,training_rows,test_rows,test_treatment_rows,test_control_rows,mean_predicted_uplift,positive_predicted_uplift_rows,positive_economic_uplift_rows,treatment_brier,control_brier,qini_score,best_policy,targeting_vs_retry_all_net_difference,verdict
+581,406,175,87,88,0.016434095199618876,81,81,0.23982540768763688,0.2386127991551725,-0.44691567407888777,POSITIVE_ECONOMIC_UPLIFT,-71852.25117102865,TARGETING_NOT_PROVEN

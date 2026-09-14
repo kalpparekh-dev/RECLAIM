@@ -1,0 +1,70 @@
+dataset,best_fields,deterministic_matches,ambiguous_matches,outcome_coverage,dataset_coverage,relationship,direct_transaction_overlap
+economic_opportunities.csv,customer_id + timestamp,2904,0,1.0,1.0,OUTCOME_PARENT_OR_EXACT_COPY,2904
+recovery_context.csv,customer_id + timestamp,2904,0,1.0,1.0,OUTCOME_PARENT_OR_EXACT_COPY,2904
+recovery_opportunities.csv,customer_id + timestamp,2904,0,1.0,1.0,OUTCOME_PARENT_OR_EXACT_COPY,2904
+transaction_outcomes.csv,timestamp + failure_reason,2904,0,1.0,1.0,OUTCOME_PARENT_OR_EXACT_COPY,2904
+transactions.csv,customer_id + amount,2904,0,1.0,0.0632858979667444,OUTCOME_PARENT_OR_EXACT_COPY,2904
+customers.csv,customer_id,186,720,0.2052980132450331,0.186,WEAK_OR_PARTIAL_RELATIONSHIP,0
+recovery_model_predictions.csv,amount + transactions_last_7d,581,0,0.20013778849466068,1.0,WEAK_OR_PARTIAL_RELATIONSHIP,581
+economic_final_policy.csv,amount,579,2,0.20006910850034554,0.9965576592082617,WEAK_OR_PARTIAL_RELATIONSHIP,581
+recovery_final_policy.csv,amount,579,2,0.20006910850034554,0.9965576592082617,WEAK_OR_PARTIAL_RELATIONSHIP,581
+value_of_information_policy.csv,amount,579,2,0.20006910850034554,0.9965576592082617,WEAK_OR_PARTIAL_RELATIONSHIP,581
+cost_constrained_final_policy.csv,customer_id + amount,581,0,0.200068870523416,1.0,WEAK_OR_PARTIAL_RELATIONSHIP,581
+calibrated_recovery_predictions.csv,amount + failure_reason,580,1,0.19993105825577387,0.9982788296041308,WEAK_OR_PARTIAL_RELATIONSHIP,581
+causal_uplift_diagnostic.csv,amount + failure_reason,580,1,0.19993105825577387,0.9982788296041308,WEAK_OR_PARTIAL_RELATIONSHIP,581
+causal_uplift_predictions.csv,amount + failure_reason,580,1,0.19993105825577387,0.9982788296041308,WEAK_OR_PARTIAL_RELATIONSHIP,581
+incremental_recovery_policy.csv,amount + failure_reason,580,1,0.19993105825577387,0.9982788296041308,WEAK_OR_PARTIAL_RELATIONSHIP,581
+reclaim_treatment_control_experiment.csv,amount + failure_reason,580,1,0.19993105825577387,0.9982788296041308,WEAK_OR_PARTIAL_RELATIONSHIP,581
+causal_uplift_validation_predictions.csv,amount,175,0,0.06046993780234969,1.0,WEAK_OR_PARTIAL_RELATIONSHIP,175
+causal_uplift_v9_predictions.csv,amount,22,555,0.007601935038009675,0.038128249566724434,WEAK_OR_PARTIAL_RELATIONSHIP,0
+causal_uplift_v2_predictions.csv,customer_id + previous_transaction_success + transactions_last_7d + successful_payments_last_7d,20,550,0.007064641469445425,0.03508771929824561,WEAK_OR_PARTIAL_RELATIONSHIP,0
+causal_uplift_v4_predictions.csv,customer_id + historical_success_count,14,553,0.005152741994847258,0.024691358024691357,WEAK_OR_PARTIAL_RELATIONSHIP,0
+baseline_comparison.csv,intervention_cost,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+calibrated_recovery_policy.csv,intervention_cost,0,1,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_policy_comparison.csv,intervention_cost,0,1,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_v10_2_predictions.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_v10_predictions.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_v3_predictions.csv,amount,0,581,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_v6_predictions.csv,amount,0,581,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+causal_uplift_v7_predictions.csv,amount,0,581,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+cost_constrained_policy_comparison.csv,expected_net_recovery,0,1,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+economic_baseline_comparison.csv,intervention_cost,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+economic_policy_comparison.csv,expected_net_recovery,0,1,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+incremental_recovery_comparison.csv,expected_net_recovery,0,1,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_causal_experiment_v2.csv,previous_transaction_success,0,3,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_causal_experiment_v3.csv,previous_transaction_success,0,3,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_audit_v5.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_cohort_v11.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_cohort_v12.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_cohort_v13.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_cohort_v14.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_cohort_v15.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_control_audit_v7.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v1.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v10.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v11.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v12.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v13.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v14.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v15.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v2.csv,decision_reason,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v3.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v4.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v5.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v6_1.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v7.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v8.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_decisions_v9.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_financial_reconciliation_v6_1.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_outcome_capture_v11.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_outcome_capture_v15.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v10_audit.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v11_audit.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v12_audit.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v14_audit.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v15_audit.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_v19_lineage_bridge.csv,status,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_production_validated_outcomes_v15.csv,customer_id,0,425,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+reclaim_recovery_calibration_integration_v2.csv,recommended_action,0,0,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+recovery_policy_comparison.csv,intervention_cost,0,2,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0
+value_of_information_comparison.csv,intervention_cost,0,2,0.0,0.0,NO_VALIDATED_RELATIONSHIP,0

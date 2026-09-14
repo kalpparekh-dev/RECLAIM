@@ -1,0 +1,12 @@
+metric,v7,v8,difference
+population,10000,10000,0.0
+target_population,500,500,0.0
+retry_all_population,9500,9500,0.0
+intervention_rate,0.05,0.05,0.0
+matched_production_outcomes,0,0,0.0
+production_outcome_testable,False,False,0.0
+v7_recovery_rate,,,
+v8_recovery_rate,,,
+v7_recovered_value,0.0,,
+v8_recovered_value,,0.0,
+outcome_winner,NOT_TESTABLE,NOT_TESTABLE,

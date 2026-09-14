@@ -1,0 +1,9 @@
+control_id,control,status,observed_value,expected_value,severity
+POLICY,V10.2 TOP_RATE policy,PASS,TOP_RATE,TOP_RATE,INFO
+TARGET_RATE,Validated target rate,PASS,5.00%,5.00%,INFO
+TARGET_POPULATION,TARGET population,PASS,500,500,INFO
+RETRY_ALL_POPULATION,RETRY_ALL population,PASS,9500,9500,INFO
+FINANCIAL_RECONCILIATION,V6.1 financial reconciliation,PASS,1.1368683772161603e-13,<= 1e-06,CRITICAL
+ORACLE_DECISION_USAGE,Oracle fields used for production decisions,PASS,NO,NO,CRITICAL
+TARGETING_CHANGE,V7 changed targeting,PASS,NO,NO,CRITICAL
+ECONOMIC_CHANGE,V7 changed economic assumptions,PASS,NO,NO,CRITICAL

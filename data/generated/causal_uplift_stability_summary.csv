@@ -1,0 +1,2 @@
+validation_runs,mean_qini,qini_std,positive_qini_rate,mean_predicted_uplift,uplift_std,mean_targeting_minus_retry_all,std_targeting_minus_retry_all,targeting_advantage_ci_low,targeting_advantage_ci_high,targeting_beats_retry_all_rate,verdict
+20,767.3727043889742,1106.9428853887925,0.7,0.050803864379178595,0.030003805943381385,-86638.69487797095,36849.97736203274,-102788.90953073432,-70488.48022520758,0.0,TARGETING_NOT_STABLE

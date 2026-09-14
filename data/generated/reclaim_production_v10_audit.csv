@@ -1,0 +1,13 @@
+check,status,detail
+V10.2 targeting policy,PASS,TOP_RATE 5% preserved
+V7 target population,PASS,500 TARGET / 9500 RETRY_ALL
+V8 target population,PASS,500 TARGET / 9500 RETRY_ALL
+Targeting changed by V10,PASS,NO
+Calibration targeting replacement,PASS,NO
+Calibration action policy modification,PASS,V10 does not modify V8 actions
+Oracle fields used for decisions,PASS,NO
+Outcome IDs matched exactly,WARN,0
+Artificial ID generation,PASS,NONE
+Artificial outcome assignment,PASS,NONE
+Outcome ambiguity,PASS,0
+V11 controlled outcome test eligibility,WARN,OUTCOME_LINKAGE_NO_PRODUCTION_MATCH

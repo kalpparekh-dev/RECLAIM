@@ -1,0 +1,2 @@
+pipeline_version,source_version,generated_at_utc,total_rows,unique_transaction_ids,duplicate_transaction_rows,unique_customers,expected_top_rate,observed_intervention_rate,selected_transaction_count,target_rate_difference,schema_status,transaction_integrity_status,targeting_status,population_consistency_status,backend_readiness_status,outcome_evaluation_performed,overall_status
+V21,V10.2,2026-08-29T06:39:45.471086+00:00,10000,10000,0,425,0.05,0.05,500,0.0,PASS,PASS,PASS,PASS,PASS,False,PASS

@@ -1,0 +1,2 @@
+validation_runs,mean_qini,qini_std,positive_qini_rate,mean_probability_uplift,mean_economic_uplift,mean_intervention_rate,mean_efficiency_gain,positive_efficiency_runs,mean_vs_no_intervention,mean_vs_retry_all_total_value,verdict
+10,104.43881288734879,17.01557407857982,1.0,0.006345942060102602,-3.126034829417226,0.5171666666666667,-79.7764919669883,1,2272620.739,-2365225.332,POSITIVE_UPLIFT_BUT_RETRY_ALL_MORE_EFFICIENT

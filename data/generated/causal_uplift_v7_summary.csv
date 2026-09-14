@@ -1,0 +1,2 @@
+validation_runs,mean_qini,qini_std,positive_qini_rate,mean_probability_uplift,mean_economic_uplift,mean_intervention_rate,targeting_advantage_vs_no_intervention,beat_no_intervention_rate,targeting_advantage_vs_retry_all,beat_retry_all_rate,retry_all_ci_low,retry_all_ci_high,oracle_advantage_vs_retry_all,verdict
+20,292011.95219499065,68741.0553370459,1.0,0.06654586955330907,127.43817002923058,0.6634,106.93478414833342,0.95,-32.62386080499988,0.25,-53.46651241587435,-11.781209194125406,-13.530589344999907,RETRY_ALL_REMAINS_SUPPORTED

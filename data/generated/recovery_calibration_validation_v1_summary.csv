@@ -1,0 +1,2 @@
+version,validation_runs,population,mean_raw_brier,mean_logistic_brier,mean_isotonic_brier,logistic_relative_brier_improvement,logistic_better_rate,isotonic_better_rate,logistic_selected_rate,calibration_verdict,v10_2_policy_preserved,v10_2_target_rate,production_policy_changed,oracle_fields_used
+CALIBRATION_V1,20,581,0.23605081556286095,0.2148286361241485,0.21099983821978655,0.08990513075800384,0.95,0.95,0.25,CALIBRATION_STABILITY_SUPPORTED,True,0.05,False,False

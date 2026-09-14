@@ -1,0 +1,2 @@
+validation_runs,mean_qini,qini_std,positive_qini_rate,mean_probability_uplift,mean_economic_uplift,mean_intervention_rate,retry_all_win_rate,no_intervention_win_rate,mean_advantage_vs_retry_all,retry_all_ci_lower,retry_all_ci_upper,negative_treatment_effect_rate,verdict
+20,142661.4558208557,122780.40293512805,0.85,-0.0013856900053505403,-31.712675571345255,0.44895000000000007,0.0,1.0,-974.4251518333333,-1010.6378166272002,-938.2124870394664,0.0,RETRY_ALL_SUPPORTED_BY_CURRENT_EXPERIMENT

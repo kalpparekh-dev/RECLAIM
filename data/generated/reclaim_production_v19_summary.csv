@@ -1,0 +1,2 @@
+v102_rows,v7_rows,v8_rows,outcome_rows,production_transactions,outcome_transactions,direct_transaction_overlap,production_customers,outcome_customers,customer_overlap,ambiguous_customers,production_id_dataset_candidates,multihop_candidates,dual_id_candidates,validated_bridges,final_verdict
+10000,10000,10000,2904,10000,2904,0,425,906,425,425,37,62,8,0,EXPLICIT_ID_CANDIDATE_FOUND_BUT_NOT_VALIDATED

@@ -1,0 +1,20 @@
+{
+  "policy_version": "V10.2",
+  "policy_file": "causal_uplift_v10_2_predictions.csv",
+  "policy_sha256": "034bf6682905a1ee8e4b65d3247713a4b07efaa9871eb5de0991db55fdb45e55",
+  "model_version": "Causal_XLearner_v10.2",
+  "dataset_version": "V10.2_Production",
+  "feature_version": "F_UPLIFT_V2",
+  "training_code_version": "simulator/causal_uplift_optimizer_v10_2.py",
+  "validation_report": "docs/MODEL_VALIDATION_RECONCILIATION.md",
+  "validation_status": "APPROVED_FOR_PRODUCTION",
+  "created_at": "2026-09-10T12:00:00Z",
+  "approved_at": "2026-09-11T15:30:00Z",
+  "approved_by": "RECLAIM_GOVERNANCE_BOARD",
+  "deployment_status": "DEPLOYED_READ_ONLY",
+  "targeting_policy": "TOP_RATE",
+  "target_rate": 0.05,
+  "total_transactions": 10000,
+  "selected_transactions": 500,
+  "fallback_action": "RETRY_ALL"
+}

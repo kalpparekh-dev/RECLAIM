@@ -1,0 +1,9 @@
+audit_item,status,detail
+V10.2 targeting immutable,PASS,5% TOP_RATE population preserved.
+Artificial transaction IDs,PASS,No artificial transaction IDs created.
+Artificial outcomes,PASS,No artificial production outcomes created.
+Calibration predictions,PASS,Calibration predictions are not treated as observed production outcomes.
+Exact transaction linkage,PASS,Production outcomes are linked only by exact transaction_id.
+Matched production outcomes,INFO,0
+Evaluation readiness,WAIT,OUTCOME_CAPTURE_INSUFFICIENT_NO_PRODUCTION_MATCH
+V7 vs V8 improvement claim,PASS,NO CLAIM until legitimate production outcome evaluation is ready.

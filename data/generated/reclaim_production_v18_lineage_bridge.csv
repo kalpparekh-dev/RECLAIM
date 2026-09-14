@@ -1,0 +1,6 @@
+analysis_type,source_dataset,target_dataset,field,source_unique,target_unique,overlap,source_match_rate,target_match_rate,assessment
+single_field,V10.2,OUTCOMES,customer_id,425,906,425,1.0,0.46909492273730685,SOURCE_COMPLETE
+single_field,V7,OUTCOMES,customer_id,425,906,425,1.0,0.46909492273730685,SOURCE_COMPLETE
+single_field,V8,OUTCOMES,customer_id,425,906,425,1.0,0.46909492273730685,SOURCE_COMPLETE
+single_field,V7,OUTCOMES,recommended_action,5,3,0,0.0,0.0,NO_OVERLAP
+single_field,V8,OUTCOMES,recommended_action,5,3,0,0.0,0.0,NO_OVERLAP

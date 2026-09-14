@@ -1,0 +1,13 @@
+column,missing_count,missing_rate,status
+transaction_id,0,0.0,PASS
+customer_id,0,0.0,PASS
+predicted_treatment_probability,0,0.0,PASS
+predicted_control_probability,0,0.0,PASS
+predicted_probability_uplift,0,0.0,PASS
+selected_policy_type,0,0.0,PASS
+selected_policy_parameter,0,0.0,PASS
+selected_policy,0,0.0,PASS
+intervention_selected,0,0.0,PASS
+oracle_control_value,0,0.0,PASS
+oracle_treatment_value,0,0.0,PASS
+oracle_incremental_value,0,0.0,PASS

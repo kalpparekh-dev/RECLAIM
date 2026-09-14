@@ -1,0 +1,6 @@
+source_a,source_b,exact_overlap,source_a_count,source_b_count,source_a_match_rate,source_b_match_rate
+V10.2,V7,10000,10000,10000,1.0,1.0
+V10.2,V8,10000,10000,10000,1.0,1.0
+V10.2,RECOVERY_OUTCOMES,0,10000,2904,0.0,0.0
+V7,RECOVERY_OUTCOMES,0,10000,2904,0.0,0.0
+V8,RECOVERY_OUTCOMES,0,10000,2904,0.0,0.0
