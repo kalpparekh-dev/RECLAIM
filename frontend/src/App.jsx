@@ -16,7 +16,12 @@ import {
   LogOut,
   Sliders,
   Clock,
-  Circle
+  Circle,
+  CreditCard,
+  Radio,
+  Layers,
+  FlaskConical,
+  Server
 } from 'lucide-react'
 
 import Login from './components/Login'
@@ -27,6 +32,11 @@ import MonitoringView from './components/MonitoringView'
 import DemoWorkflow from './components/DemoWorkflow'
 import HistoricalAnalytics from './components/HistoricalAnalytics'
 import GovernanceDrawer from './components/GovernanceDrawer'
+import PaymentOperations from './components/PaymentOperations'
+import GatewaySandbox from './components/GatewaySandbox'
+import FeedbackOutcomesView from './components/FeedbackOutcomesView'
+import ExperimentsView from './components/ExperimentsView'
+import SystemHealthView from './components/SystemHealthView'
 
 const API_BASE = ''
 
@@ -81,6 +91,11 @@ export default function App() {
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'explorer', label: 'Transactions', icon: Search },
     { id: 'console', label: 'Decision Console', icon: Cpu },
+    { id: 'payment-ops', label: 'Payment Operations', icon: CreditCard },
+    { id: 'gateway-sandbox', label: 'Gateway Sandbox', icon: Radio },
+    { id: 'feedback-outcomes', label: 'Reconciliation & CSAT', icon: Layers },
+    { id: 'experiments', label: 'A/B Experiments', icon: FlaskConical },
+    { id: 'system-health', label: 'System Telemetry', icon: Server },
     { id: 'monitoring', label: 'Monitoring', icon: Activity },
     { id: 'demo', label: 'Demo Recovery', icon: PlayCircle, highlight: true },
     { id: 'historical', label: 'Historical Analytics', icon: History },
@@ -96,7 +111,7 @@ export default function App() {
           isSidebarCollapsed ? 'w-20' : 'w-64'
         }`}
       >
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-80px)]">
           {/* Logo & Toggle */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 overflow-hidden">
@@ -137,7 +152,7 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => setIsGovernanceOpen(true)}
-                    className={`w-full flex items-center space-x-3 px-3.5 py-3 rounded-xl text-xs font-semibold transition-all ${
+                    className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                       isSidebarCollapsed ? 'justify-center' : ''
                     } text-graphite-500 hover:text-ivory-50 hover:bg-graphite-800/60`}
                   >
@@ -151,7 +166,7 @@ export default function App() {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center space-x-3 px-3.5 py-3 rounded-xl text-xs font-semibold transition-all ${
+                  className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                     isSidebarCollapsed ? 'justify-center' : ''
                   } ${
                     isActive
@@ -180,7 +195,7 @@ export default function App() {
 
           <button
             onClick={() => setIsLoggedIn(false)}
-            className={`w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-copper-400 hover:bg-copper-950/40 transition-colors ${
+            className={`w-full flex items-center space-x-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-copper-400 hover:bg-copper-950/40 transition-colors ${
               isSidebarCollapsed ? 'justify-center' : ''
             }`}
           >
@@ -262,6 +277,16 @@ export default function App() {
             />
           )}
 
+          {activeTab === 'payment-ops' && <PaymentOperations />}
+
+          {activeTab === 'gateway-sandbox' && <GatewaySandbox />}
+
+          {activeTab === 'feedback-outcomes' && <FeedbackOutcomesView />}
+
+          {activeTab === 'experiments' && <ExperimentsView />}
+
+          {activeTab === 'system-health' && <SystemHealthView />}
+
           {activeTab === 'monitoring' && <MonitoringView />}
 
           {activeTab === 'demo' && <DemoWorkflow initialTxId={selectedTxId} />}
@@ -269,7 +294,7 @@ export default function App() {
           {activeTab === 'historical' && <HistoricalAnalytics />}
 
           {activeTab === 'settings' && (
-            <div className="bg-graphite-900 border border-graphite-800 rounded-2xl p-8 max-w-2xl mx-auto space-y-4">
+            <div className="bg-graphite-900 border border-graphite-800 rounded-2xl p-8 max-w-2xl mx-auto space-y-4 font-sans">
               <h2 className="text-lg font-bold text-ivory-50 flex items-center gap-2">
                 <Settings className="w-5 h-5 text-gold-400" />
                 System Settings & Policy Parameters
@@ -287,6 +312,10 @@ export default function App() {
                   <span>Policy Immutability:</span>
                   <strong className="text-emerald-400">LOCKED & READ-ONLY</strong>
                 </div>
+                <div className="bg-obsidian-950 p-4 rounded-xl border border-graphite-800 justify-between flex items-center">
+                  <span>Gateway Mode:</span>
+                  <strong className="text-gold-400">SIMULATOR SANDBOX / RAZORPAY ADAPTER</strong>
+                </div>
               </div>
             </div>
           )}
@@ -295,7 +324,7 @@ export default function App() {
         {/* FOOTER */}
         <footer className="border-t border-graphite-800/80 bg-obsidian-950 py-4 text-center text-xs text-graphite-500 font-mono">
           <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <span>RECLAIM — Intelligent Payment Recovery</span>
+            <span>RECLAIM — Intelligent Payment Recovery & Decisioning Platform</span>
             <span className="text-gold-400">Production Policy V10.2</span>
             <button onClick={() => setIsGovernanceOpen(true)} className="text-emerald-400 hover:underline">
               Governance Directives

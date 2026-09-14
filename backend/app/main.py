@@ -14,17 +14,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
-from backend.app.routes import health, policy, monitoring, outcomes, demo, events
+from backend.app.routes import health, policy, monitoring, outcomes, demo, events, payments, gateway, reconciliation, feedback, experiments
 from backend.app.policy_service import get_policy_service
+from backend.app.queue_worker import get_queue_worker
 from backend.app.serializer import sanitize_production_response
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("reclaim")
 
 app = FastAPI(
-    title="RECLAIM Production Policy Service",
-    description="Payment-recovery causal decisioning and policy execution service",
-    version="1.0.0"
+    title="RECLAIM Payment Recovery & Decisioning Platform",
+    description="Enterprise payment recovery decisioning, state machine, gateway sandbox, reconciliation, and feedback platform",
+    version="2.0.0"
 )
 
 # P0-8: Global Exception Handler for decisioning safety
@@ -69,6 +70,11 @@ app.include_router(monitoring.router)
 app.include_router(outcomes.router)
 app.include_router(demo.router)
 app.include_router(events.router)
+app.include_router(payments.router)
+app.include_router(gateway.router)
+app.include_router(reconciliation.router)
+app.include_router(feedback.router)
+app.include_router(experiments.router)
 
 # Mount static frontend files if built
 FRONTEND_DIST_DIR = os.path.join(BASE_DIR, "frontend", "dist")
@@ -91,10 +97,12 @@ if os.path.exists(FRONTEND_DIST_DIR):
 
 @app.on_event("startup")
 def startup_event():
-    print("[RECLAIM] Initializing RECLAIM Production Policy Engine V10.2...")
+    print("[RECLAIM] Initializing RECLAIM Production Policy Engine V10.2 & Payment Recovery Platform...")
     svc = get_policy_service()
     summary = svc.get_summary()
     print(f"[RECLAIM] Production Policy V10.2 Loaded: {summary['total_transactions']} transactions, {summary['selected_transactions']} targeted ({summary['targeting_rate']*100:.1f}%)")
+    worker = get_queue_worker()
+    print(f"[RECLAIM] Background Event Queue Worker initialized (Status: {worker.running})")
 
 if __name__ == "__main__":
     import uvicorn

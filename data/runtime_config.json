@@ -3,9 +3,289 @@
   "fallback_decision": "RETRY_ALL",
   "require_policy_validation": true,
   "allow_action_execution": false,
-  "last_updated": "2026-09-13T16:30:04.860981+00:00",
+  "last_updated": "2026-09-14T07:03:29.356276+00:00",
   "updated_by": "TEST",
   "audit_log": [
+    {
+      "timestamp": "2026-09-14T07:03:29.356276+00:00",
+      "old_mode": "PAUSED",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:28.970276+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "PAUSED",
+      "updated_by": "TEST",
+      "reason": "Adversarial Test"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:28.921432+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:28.527184+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:27.602991+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "ADMIN_OPERATOR",
+      "reason": "TEST_RESTORE"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:27.568080+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "SYSTEM_SAFETY",
+      "reason": "TEST_EMERGENCY"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:25.218257+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:25.209894+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "DRIFT_MONITOR",
+      "reason": "CRITICAL_MODEL_DRIFT (PSI=0.3500 > 0.25)"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:24.996175+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST_RESTORE",
+      "reason": "Restore after test_p0_5"
+    },
+    {
+      "timestamp": "2026-09-14T07:03:24.485719+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:45.880166+00:00",
+      "old_mode": "PAUSED",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:45.430903+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "PAUSED",
+      "updated_by": "TEST",
+      "reason": "Adversarial Test"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:45.394174+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:45.035969+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:43.096032+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "ADMIN_OPERATOR",
+      "reason": "TEST_RESTORE"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:43.048878+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "SYSTEM_SAFETY",
+      "reason": "TEST_EMERGENCY"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:40.900404+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:40.894449+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "DRIFT_MONITOR",
+      "reason": "CRITICAL_MODEL_DRIFT (PSI=0.3500 > 0.25)"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:40.730606+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST_RESTORE",
+      "reason": "Restore after test_p0_5"
+    },
+    {
+      "timestamp": "2026-09-14T06:50:40.421379+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:25.743213+00:00",
+      "old_mode": "PAUSED",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:25.114150+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "PAUSED",
+      "updated_by": "TEST",
+      "reason": "Adversarial Test"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:24.983476+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:24.031846+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:20.625530+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "ADMIN_OPERATOR",
+      "reason": "TEST_RESTORE"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:20.602626+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "SYSTEM_SAFETY",
+      "reason": "TEST_EMERGENCY"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:13.259284+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:13.245067+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "DRIFT_MONITOR",
+      "reason": "CRITICAL_MODEL_DRIFT (PSI=0.3500 > 0.25)"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:12.934032+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST_RESTORE",
+      "reason": "Restore after test_p0_5"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:12.067163+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:45:00.439996+00:00",
+      "old_mode": "PAUSED",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:59.763164+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "PAUSED",
+      "updated_by": "TEST",
+      "reason": "Adversarial Test"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:59.653210+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:58.630720+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:55.000218+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "ADMIN_OPERATOR",
+      "reason": "TEST_RESTORE"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:54.981944+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "SYSTEM_SAFETY",
+      "reason": "TEST_EMERGENCY"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:43.517629+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST",
+      "reason": "Restore"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:43.441713+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "DRIFT_MONITOR",
+      "reason": "CRITICAL_MODEL_DRIFT (PSI=0.3500 > 0.25)"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:42.878286+00:00",
+      "old_mode": "FALLBACK",
+      "new_mode": "ACTIVE",
+      "updated_by": "TEST_RESTORE",
+      "reason": "Restore after test_p0_5"
+    },
+    {
+      "timestamp": "2026-09-14T06:44:42.372472+00:00",
+      "old_mode": "ACTIVE",
+      "new_mode": "FALLBACK",
+      "updated_by": "POLICY_SERVICE",
+      "reason": "POLICY_HASH_MISMATCH"
+    },
     {
       "timestamp": "2026-09-13T16:30:04.860981+00:00",
       "old_mode": "FALLBACK",
