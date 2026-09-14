@@ -19,7 +19,7 @@ export default function ExperimentsView() {
       }
     } catch (err) {
       console.error('Failed to fetch experiment evaluation:', err)
-    } font-sans finally {
+    } finally {
       setLoading(false)
     }
   }

@@ -1,3 +1,4 @@
+import os
 import json
 from typing import Optional, Dict, Any
 from fastapi import APIRouter, Request, HTTPException, Header
@@ -7,7 +8,11 @@ from backend.app.gateways.factory import get_simulator_gateway
 from backend.app.payment_service import get_payment_service, PaymentServiceError
 from backend.app.queue_worker import get_queue_worker
 from backend.app.serializer import sanitize_production_response
-from backend.app.webhook_verifier import verify_razorpay_signature, WebhookVerificationError
+from backend.app.webhook_verifier import (
+    verify_razorpay_signature,
+    verify_razorpay_checkout_signature,
+    WebhookVerificationError
+)
 from backend.app.domain.models import PaymentState
 
 router = APIRouter(prefix="/api", tags=["Gateway & Sandbox"])
@@ -25,6 +30,12 @@ class SandboxWebhookSimulateRequest(BaseModel):
     event_type: str = "payment.failed" # payment.failed, payment.captured
     tamper_signature: bool = False
     alter_body: bool = False
+
+class RazorpayVerifyCheckoutRequest(BaseModel):
+    razorpay_order_id: str
+    razorpay_payment_id: str
+    razorpay_signature: str
+    reclaim_payment_id: Optional[str] = None
 
 @router.post("/webhooks/simulator")
 @router.post("/webhooks/razorpay")
@@ -70,6 +81,66 @@ async def ingest_webhook_event(
         "reclaim_payment_id": reclaim_pay_id,
         "message": "Webhook payload validated and enqueued for background worker processing."
     }
+
+@router.post("/gateway/razorpay/verify-payment")
+def verify_razorpay_checkout_payment(req: RazorpayVerifyCheckoutRequest):
+    """
+    Verifies Razorpay Checkout modal payment signature:
+    HMAC_SHA256(razorpay_order_id + "|" + razorpay_payment_id, RAZORPAY_KEY_SECRET)
+    Transition payment state to CAPTURED / RECOVERED upon valid signature verification.
+    """
+    if not req.razorpay_order_id or not req.razorpay_order_id.strip():
+        raise HTTPException(status_code=400, detail="Missing required field 'razorpay_order_id'.")
+    if not req.razorpay_payment_id or not req.razorpay_payment_id.strip():
+        raise HTTPException(status_code=400, detail="Missing required field 'razorpay_payment_id'.")
+    if not req.razorpay_signature or not req.razorpay_signature.strip():
+        raise HTTPException(status_code=400, detail="Missing required field 'razorpay_signature'.")
+
+    try:
+        verify_razorpay_checkout_signature(
+            order_id=req.razorpay_order_id,
+            payment_id=req.razorpay_payment_id,
+            signature=req.razorpay_signature
+        )
+    except WebhookVerificationError as ve:
+        raise HTTPException(status_code=400, detail=f"Checkout signature verification failed: {str(ve)}")
+
+    payment_svc = get_payment_service()
+    target_payment = None
+
+    if req.reclaim_payment_id:
+        target_payment = payment_svc.get_payment_by_id(req.reclaim_payment_id)
+    
+    if not target_payment:
+        # Search by order_id or external_id
+        results = payment_svc.list_payments(search=req.razorpay_order_id, limit=1)
+        if results.get("payments"):
+            target_payment = results["payments"][0]
+
+    updated_payment = None
+    if target_payment:
+        pay_id = target_payment["id"]
+        curr_state = target_payment["status"]
+        
+        # State machine transition to CAPTURED / RECOVERED
+        new_state = PaymentState.RECOVERED if curr_state in ("RETRY_SCHEDULED", "RETRY_PROCESSING", "RECOVERY_ELIGIBLE") else PaymentState.CAPTURED
+        
+        updated_payment = payment_svc.transition_payment_state(
+            payment_id=pay_id,
+            new_state=new_state,
+            event_type="CHECKOUT_SIGNATURE_VERIFIED",
+            reason=f"Razorpay Checkout payment verified ({req.razorpay_payment_id})",
+            actor="CHECKOUT_VERIFIER"
+        )
+
+    return sanitize_production_response({
+        "status": "SUCCESS",
+        "verified": True,
+        "razorpay_order_id": req.razorpay_order_id,
+        "razorpay_payment_id": req.razorpay_payment_id,
+        "payment": updated_payment,
+        "message": "Razorpay Checkout signature verified successfully."
+    })
 
 @router.post("/gateway/sandbox/create-payment")
 def sandbox_create_payment(req: SandboxCreatePaymentRequest):

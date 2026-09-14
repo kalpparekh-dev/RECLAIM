@@ -1,10 +1,14 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
+class PaymentGatewayError(Exception):
+    """Raised when an error occurs communicating with a payment gateway."""
+    pass
+
 class PaymentGateway(ABC):
     """
     Abstract Payment Gateway Interface.
-    Implemented by SimulatorGateway (Sandbox) and RazorpayGatewayAdapter (Production).
+    Implemented by SimulatorGateway (Sandbox) and RazorpayGatewayAdapter (Production / Test Mode).
     """
 
     @abstractmethod
@@ -17,7 +21,7 @@ class PaymentGateway(ABC):
         order_id: Optional[str] = None,
         idempotency_key: Optional[str] = None
     ) -> Dict[str, Any]:
-        """Creates a new payment on the gateway."""
+        """Creates a new payment/order on the gateway."""
         pass
 
     @abstractmethod

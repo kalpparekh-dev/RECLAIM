@@ -1,23 +1,31 @@
 """
-Unit and Integration Tests for RECLAIM Payment Platform Expansion
-===================================================================
-Tests payment lifecycle state transitions, database persistence, gateway simulator,
-HMAC webhook signature validation, idempotency, outcome reconciliation, CSAT feedback,
-and experiment evaluation APIs.
+Unit and Integration Tests for RECLAIM Payment Platform Expansion & Razorpay Test Mode Integration
+===================================================================================================
+Tests payment lifecycle state transitions, database persistence, gateway simulator, Razorpay adapter,
+checkout signature verification, HMAC webhook validation, idempotency, reconciliation, and secret safety.
 """
 
 import unittest
 import os
 import tempfile
 import json
+import hmac
+import hashlib
+from unittest.mock import patch, MagicMock
 from fastapi.testclient import TestClient
 
 from backend.app.domain.models import PaymentState, FailureReason, ReconciliationStatus
 from backend.app.payment_service import PaymentService
 from backend.app.gateways.simulator import SimulatorGateway
+from backend.app.gateways.razorpay import RazorpayGatewayAdapter
+from backend.app.gateways.base import PaymentGatewayError
 from backend.app.reconciliation_service import ReconciliationService
 from backend.app.feedback_service import FeedbackService
-from backend.app.webhook_verifier import WebhookVerificationError
+from backend.app.webhook_verifier import (
+    verify_razorpay_signature,
+    verify_razorpay_checkout_signature,
+    WebhookVerificationError
+)
 from backend.app.main import app
 
 class TestPaymentPlatformDomain(unittest.TestCase):
@@ -156,6 +164,99 @@ class TestGatewaySimulatorAndHMAC(unittest.TestCase):
             self.gateway.verify_webhook_signature(raw_bytes, "invalid_sig_xyz")
 
 
+class TestRazorpayIntegrationAndSafety(unittest.TestCase):
+    def test_razorpay_unconfigured_fallback(self):
+        adapter = RazorpayGatewayAdapter(key_id="", key_secret="", webhook_secret="")
+        self.assertFalse(adapter.is_configured())
+
+        res = adapter.create_payment(customer_id="CUST_TEST", amount=1500.0)
+        self.assertEqual(res["environment"], "RAZORPAY_ADAPTER_UNCONFIGURED")
+        self.assertEqual(res["amount_paise"], 150000)
+
+    @patch("backend.app.gateways.razorpay.RazorpayGatewayAdapter._make_request")
+    def test_razorpay_order_creation_mock(self, mock_make_req):
+        mock_make_req.return_value = {
+            "id": "order_test_12345",
+            "amount": 250000,
+            "currency": "INR",
+            "status": "created"
+        }
+
+        adapter = RazorpayGatewayAdapter(
+            key_id="rzp_test_key123",
+            key_secret="secret_abc123",
+            webhook_secret="whsec_xyz"
+        )
+        self.assertTrue(adapter.is_configured())
+
+        res = adapter.create_payment(customer_id="CUST_TEST", amount=2500.0)
+        self.assertEqual(res["order_id"], "order_test_12345")
+        self.assertEqual(res["amount_paise"], 250000)
+        self.assertEqual(res["environment"], "RAZORPAY_TEST_MODE")
+        self.assertEqual(res["key_id"], "rzp_test_key123")
+
+    @patch("backend.app.gateways.razorpay.RazorpayGatewayAdapter._make_request")
+    def test_razorpay_api_failure_handling(self, mock_make_req):
+        mock_make_req.side_effect = PaymentGatewayError("Razorpay API HTTP Error (401): Invalid Key ID")
+
+        adapter = RazorpayGatewayAdapter(key_id="rzp_test_bad", key_secret="bad_secret")
+        with self.assertRaises(PaymentGatewayError) as ctx:
+            adapter.create_payment(customer_id="CUST_FAIL", amount=1000.0)
+        self.assertIn("Invalid Key ID", str(ctx.exception))
+
+    def test_checkout_signature_verification_valid(self):
+        secret = "test_key_secret_123"
+        order_id = "order_rzp_9999"
+        payment_id = "pay_rzp_8888"
+        msg = f"{order_id}|{payment_id}".encode("utf-8")
+        valid_sig = hmac.new(secret.encode("utf-8"), msg, hashlib.sha256).hexdigest()
+
+        self.assertTrue(verify_razorpay_checkout_signature(
+            order_id=order_id,
+            payment_id=payment_id,
+            signature=valid_sig,
+            secret=secret
+        ))
+
+    def test_checkout_signature_verification_invalid(self):
+        secret = "test_key_secret_123"
+        order_id = "order_rzp_9999"
+        payment_id = "pay_rzp_8888"
+
+        with self.assertRaises(WebhookVerificationError):
+            verify_razorpay_checkout_signature(
+                order_id=order_id,
+                payment_id=payment_id,
+                signature="invalid_tampered_sig",
+                secret=secret
+            )
+
+    def test_checkout_signature_missing_fields(self):
+        with self.assertRaises(WebhookVerificationError):
+            verify_razorpay_checkout_signature(order_id="", payment_id="pay_1", signature="sig_1", secret="sec")
+        with self.assertRaises(WebhookVerificationError):
+            verify_razorpay_checkout_signature(order_id="order_1", payment_id="", signature="sig_1", secret="sec")
+        with self.assertRaises(WebhookVerificationError):
+            verify_razorpay_checkout_signature(order_id="order_1", payment_id="pay_1", signature="", secret="sec")
+
+    def test_secret_leak_protection(self):
+        secret = "SUPER_SECRET_KEY_SECRET_999"
+        adapter = RazorpayGatewayAdapter(
+            key_id="rzp_test_123",
+            key_secret=secret,
+            webhook_secret="whsec_secret_888"
+        )
+        try:
+            res = adapter.create_payment("CUST_SEC", 100.0)
+            res_json = json.dumps(res)
+            self.assertNotIn(secret, res_json)
+            self.assertNotIn("whsec_secret_888", res_json)
+        except PaymentGatewayError as e:
+            err_msg = str(e)
+            self.assertNotIn(secret, err_msg)
+            self.assertNotIn("whsec_secret_888", err_msg)
+
+
 class TestReconciliationAndFeedback(unittest.TestCase):
     def setUp(self):
         self.payment_service = PaymentService()
@@ -248,6 +349,37 @@ class TestPaymentPlatformAPIEndpoints(unittest.TestCase):
         )
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.json()["status"], "ACCEPTED")
+
+    def test_checkout_verify_endpoint_success(self):
+        secret = os.getenv("RAZORPAY_KEY_SECRET", "mock_key_secret_test")
+        with patch.dict(os.environ, {"RAZORPAY_KEY_SECRET": secret}):
+            order_id = "order_test_check_1"
+            payment_id = "pay_test_check_1"
+            msg = f"{order_id}|{payment_id}".encode("utf-8")
+            valid_sig = hmac.new(secret.encode("utf-8"), msg, hashlib.sha256).hexdigest()
+
+            res = self.client.post(
+                "/api/gateway/razorpay/verify-payment",
+                json={
+                    "razorpay_order_id": order_id,
+                    "razorpay_payment_id": payment_id,
+                    "razorpay_signature": valid_sig
+                }
+            )
+            self.assertEqual(res.status_code, 200)
+            self.assertTrue(res.json()["verified"])
+
+    def test_checkout_verify_endpoint_invalid_signature(self):
+        res = self.client.post(
+            "/api/gateway/razorpay/verify-payment",
+            json={
+                "razorpay_order_id": "order_1",
+                "razorpay_payment_id": "pay_1",
+                "razorpay_signature": "bad_sig_123"
+            }
+        )
+        self.assertEqual(res.status_code, 400)
+        self.assertIn("verification failed", res.json()["detail"].lower())
 
     def test_experiments_endpoint(self):
         res = self.client.get("/api/recovery/experiments")

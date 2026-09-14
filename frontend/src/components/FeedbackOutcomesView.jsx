@@ -40,7 +40,7 @@ export default function FeedbackOutcomesView() {
       }
     } catch (err) {
       console.error('Failed to fetch outcomes/feedback data:', err)
-    } font-sans finally {
+    } finally {
       setLoading(false)
     }
   }
